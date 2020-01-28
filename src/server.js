@@ -16,7 +16,8 @@ app.use(routes);
 // DB connection
 mongoose.connect(process.env.DB_CONNECT,{ 
 	useNewUrlParser: true, 
-	useUnifiedTopology: true
+	useUnifiedTopology: true,
+	useCreateIndex: true
 }, console.log('Conneted do db')
 );
 

@@ -3,11 +3,11 @@ const bcrypt = require('bcrypt');
 
 module.exports = {
   async store(req, res) {
-    var { name, username, city, email, password } = req.body;
+    var { name, username, city, password } = req.body;
 
     // Hashing password
     const saltRounds = 10;
-    var hash = bcrypt.hashSync(password, saltRounds);
+    var hash = await bcrypt.hash(password, saltRounds);
 
     // Verify if exists and save
     let usernameVerify = await User.findOne({ username });
@@ -16,8 +16,7 @@ module.exports = {
       user = await User.create({
         name,
         username,
-        city, 
-        email, 
+        city,
         password: hash
       });
     } else {
