@@ -6,10 +6,6 @@ const routes = require('./routes');
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send("Olá você");
-});
-
 app.use(express.json());
 app.use(routes);
 

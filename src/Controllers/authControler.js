@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
   async index(req, res){
@@ -11,6 +12,9 @@ module.exports = {
     const validPass = await bcrypt.compareSync(req.body.password, user.password);
     if (!validPass) return res.status(400).send('Password incorrect');
 
-    res.send('Logged in');
+    // create and assign token
+    const token = jwt.sign({ _id: user._id}, process.env.TOKEN_SECRET);
+    res.header('auth-token', token).send(token);
+    
   }
 }
