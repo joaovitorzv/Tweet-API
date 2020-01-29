@@ -5,6 +5,9 @@ module.exports = {
   async store(req, res) {
     var { name, username, city, password } = req.body;
 
+    // Remove whitespaces from username
+    username = username.replace(/ /g,'');
+
     // Hashing password
     const saltRounds = 10;
     var hash = await bcrypt.hash(password, saltRounds);
