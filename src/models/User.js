@@ -7,6 +7,13 @@ const userSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
+  posts: [
+    {
+      tweet: String,
+      likes: Number,
+      author: String
+    }
+  ],
   city: String,
   password: String,
 });

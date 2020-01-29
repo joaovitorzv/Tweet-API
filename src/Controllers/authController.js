@@ -3,9 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
-  async index(req, res){
-    
-
+  async store(req, res) {
     const user = await User.findOne({ username: req.body.username });
     if (!user) return res.status(400).send('This username not exists');
 
@@ -15,6 +13,5 @@ module.exports = {
     // create and assign token
     const token = jwt.sign({ _id: user._id}, process.env.TOKEN_SECRET);
     res.header('auth-token', token).send(token);
-    
   }
 }
