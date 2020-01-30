@@ -3,12 +3,11 @@ const Post = require('../models/Post');
 
 module.exports = {
   async show(req, res) {
-    const { username } = req.params;
-    const user = await User.findOne(username);
-
-    const posts = await Post.find(username)
+    const { user_id } = req.params;
     
-
-    return res.json(posts);
+    const user = await User.findOne({username: user_id});
+    const posts = await Post.find({username: user_id})
+  
+    return res.json({user, posts});
   }
 }
