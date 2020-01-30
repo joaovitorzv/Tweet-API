@@ -7,14 +7,23 @@ module.exports = {
 
     if(!tweet) {
       const posts = await Post.find();
-      return res.json(posts);
+      return res.json(posts); 
+      
     }else {
       // Get Author from Cached Token
       const author = (req.user._id);
       // On click count one like
       const likes = 0;
-      // Save post into array in user collection
-      const post = await Post.create({ tweet, likes, author });
+      // Get username from user logged in
+      user = await User.findOne({ _id:author });
+      
+      await Post.create({
+        username: user.username, 
+        tweet,
+        likes, 
+        author 
+      });
+
       const posts = await Post.find();
       return res.json(posts);
     }

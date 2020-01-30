@@ -12,6 +12,6 @@ module.exports = {
 
     // create and assign token
     const token = jwt.sign({ _id: user._id}, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).redirect("http://http://localhost:3333/");
+    res.header('auth-token', token).json({token: token});
   }
 }
